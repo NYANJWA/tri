@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tribute to Marie Curie</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header Section */
+        header {
+            background-color: #3a506b;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        /* Navigation Bar */
+        nav {
+            background-color: #1c2541;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 1rem 0;
+        }
+        
+        nav ul li {
+            margin: 0 1rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            background-color: #3a506b;
+        }
+        
+        /* Main Content */
+        main {
+            display: block; /* Change from grid to block */
+            margin-bottom: 2rem;
+        }
+        
+        @media (min-width: 768px) {
+            main {
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+        
+        /* Image Section */
+        .image-container {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .image-container img {
+            max-width: 100%;
+            height: 30%;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .image-container img:hover {
+            transform: scale(1.02);
+        }
+        
+        /* Sections */
+        section {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        
+        section h2 {
+            color: #3a506b;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 0.5rem;
+        }
+        
+        /* Social Media Links */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background-color: #1c2541;
+            color: white;
+            margin: 0 0.5rem;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon i {
+            font-size: 1.2rem;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-5px);
+            background-color: #3a506b;
+        }
+        
+        
+        .social-icon#whatsapp {
+            background-color: #25D366;
+        }
+
+        .social-icon#whatsapp:hover {
+            background-color: #128C7E;
+            transform: translateY(-5px);
+        }
+
+        .social-icon#facebook {
+            background-color: #3b5998;  /* Facebook's brand color */
+        }
+
+        .social-icon#linkedin {
+            background-color: #0077b5;  /* LinkedIn's brand color */
+        }
+
+        .social-icon#linkedin:hover {
+            background-color: #006399;  /* Darker shade for hover */
+            transform: translateY(-5px);
+        }
+
+        
+        .social-icon#x {
+            background-color: #000000;  /* X's brand color */
+        }
+
+        .social-icon#x:hover {
+            background-color: #1D1D1D;  /* Darker shade for hover */
+            transform: translateY(-5px);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #1c2541;
+            color: white;
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: 2rem;
+        }
+        
+        /* Modal for Hidden Facts */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: #333;
+        }
+        
+        .button {
+            display: inline-block;
+            background-color: #3a506b;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+            margin-top: 1rem;
+        }
+        
+        .button:hover {
+            background-color: #1c2541;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+            
+            .social-links {
+                flex-wrap: wrap;
+            }
+            
+            .social-icon {
+                margin: 0.5rem;
+            }
+        }
+
+        /* style for the introduction section */
+        section#introduction {
+            background: linear-gradient(135deg, #f6f9fc 0%, #ffffff 100%);
+            border-left: 4px solid #3a506b;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(58, 80, 107, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        section#achievements {
+            background: linear-gradient(135deg, #e8f4ff 0%, #ffffff 100%);
+            border-left: 4px solid #0077b5;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 119, 181, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        section#impact {
+            background: linear-gradient(135deg, #fff0e8 0%, #ffffff 100%);
+            border-left: 4px solid #ff6b3d;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(255, 107, 61, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        section#members {
+            background: linear-gradient(135deg, #f6f9fc 0%, #ffffff 100%);
+            border-left: 4px solid #3a506b;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(58, 80, 107, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        section#members ul li ul li {
+            color: #555;
+            line-height: 1.8;
+        }
+
+        section#members ul li strong {
+            color: #3a506b;
+            font-size: 1.1em;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Marie Curie</h1>
+            <p>Pioneer in the field of radioactivity and the first woman to win a Nobel Prize</p>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="nav-container">
+            <ul>
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="#achievements">Achievements</a></li>
+                <li><a href="#impact">Impact</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <main>
+            <div>
+                <section id="introduction">
+                    <h2>Introduction</h2>
+                    <div class="image-container">
+                        <img src="marie.jpg" 
+                             alt="Marie Curie in her laboratory" 
+                             id="main-image"  style="width: 100%; height: auto;">
+                    </div>
+                    <p>Marie Skłodowska Curie (7 November 1867 – 4 July 1934) was a Polish and naturalized-French physicist and chemist who conducted pioneering research on radioactivity. She was the first woman to win a Nobel Prize, the first person to win Nobel Prizes in two different scientific fields, and the first woman to become a professor at the University of Paris.</p>
+                    <button class="button" id="fact-button">Reveal Hidden Fact</button>
+                </section>
+                
+                <section id="achievements">
+                    <h2>Achievements</h2>
+                    <ul>
+                        <li>First woman to win a Nobel Prize (1903 in Physics)</li>
+                        <li>First person to win Nobel Prizes in two different scientific fields (Physics and Chemistry)</li>
+                        <li>Discovered the elements polonium and radium</li>
+                        <li>Developed theory of radioactivity (a term she coined)</li>
+                        <li>Established techniques for isolating radioactive isotopes</li>
+                        <li>Founded the Curie Institutes in Paris and Warsaw</li>
+                    </ul>
+                </section>
+                
+                <section id="impact">
+                    <h2>Impact</h2>
+                    <p>Marie Curie's discoveries in the field of radioactivity revolutionized our understanding of the atom and laid the groundwork for many advancements in science and medicine. Her pioneering research on radioactivity led to the development of X-ray machines that were used during World War I to treat wounded soldiers.</p>
+                    <p>Beyond her scientific achievements, Marie Curie broke gender barriers in the sciences, becoming the first female professor at the University of Paris at a time when women were rarely allowed in higher education. Her dedication to science despite facing gender discrimination has inspired generations of women to pursue careers in STEM fields.</p>
+                    <p>The element curium was named in honor of Marie and her husband Pierre, and the unit of radioactivity, the curie (Ci), was named after them as well. Her legacy continues through the Marie Curie Actions, which provide funding for research in Europe.</p>
+                </section>
+
+
+                <section id="members">
+                    <h2>Our Members</h2>
+                     
+                        <li style="margin-bottom: 10px; padding: 10px; background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%); border-left: 3px solid #3a506b; border-radius: 4px;">
+                            <strong>Active Members</strong>
+                            <ul style="margin-top: 5px; margin-left: 20px;">
+                                <li>Emmanuel Odongo    -P100/4239G/23 </li>
+                                <li>Abigael Cheptum    -P100/4201G/23</li>
+                                <li>Diana Chepngetich  -P100/4152G/23</li>
+                                <li>Dickson Mwangi     -P100/4089G/23</li>
+                                <li>Ogutu Margaret     -P100/4221G/23</li>
+                                <li>Moranga Dominic    -P100/4250G/23</li>
+                                <li>Andrea Kangethe    -P100/4144G/23</li>
+                                <li>Nyanjwa Steve      -P100/2225G/22</li>
+                                <li>Tom Mark      -P100/4121G/23</li>
+                            </ul>
+                        </li>
+                        
+                    </ul>
+                </section>
+                
+                <section id="contact">
+                    <h2>Follow and Share</h2>
+                    <p>Connect with Curie's legacy through these platforms:</p>
+                    <div class="social-links">
+                        <a href="https://facebook.com" class="social-icon" id="facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://x.com" class="social-icon" id="x">
+                            <i class="fab fa-x-twitter"></i>
+                        </a>
+                        <a href="https://linkedin.com" class="social-icon" id="linkedin">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://wa.me/254762060712" class="social-icon" id="whatsapp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </section>
+            </div>
+        </main>
+        
+        <div class="modal" id="fact-modal">
+            <div class="modal-content">
+                <button class="close-button" id="close-button">&times;</button>
+                <h2>Did You Know?</h2>
+                <p>Marie Curie's notebooks are still radioactive to this day! They are kept in lead-lined boxes, and anyone who wishes to view them must wear protective clothing.</p>
+            </div>
+        </div>
+        
+        <div class="modal" id="image-modal">
+            <div class="modal-content">
+                <button class="close-button" id="close-image">&times;</button>
+                <h2>Marie Curie in Her Laboratory</h2>
+                <p>Marie Curie working with radioactive materials in her laboratory in Paris. She often worked in dangerous conditions with no knowledge of the harmful effects of radiation exposure.</p>
+                <img src="download.jpg" 
+                     alt="Marie Curie in her laboratory - enlarged view">
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>Created by Nyanjwa Steve | February 28, 2025</p>
+            <p>All Rights Reserved</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Show hidden fact modal
+        const factButton = document.getElementById('fact-button');
+        const factModal = document.getElementById('fact-modal');
+        const closeButton = document.getElementById('close-button');
+        
+        factButton.addEventListener('click', function() {
+            factModal.style.display = 'flex';
+        });
+        
+        closeButton.addEventListener('click', function() {
+            factModal.style.display = 'none';
+        });
+        
+        // Image click functionality
+        const mainImage = document.getElementById('main-image');
+        const imageModal = document.getElementById('image-modal');
+        const closeImage = document.getElementById('close-image');
+        
+        mainImage.addEventListener('click', function() {
+            imageModal.style.display = 'flex';
+        });
+        
+        closeImage.addEventListener('click', function() {
+            imageModal.style.display = 'none';
+        });
+        
+        // Close modals when clicking outside the content
+        window.addEventListener('click', function(event) {
+            if (event.target === factModal) {
+                factModal.style.display = 'none';
+            }
+            if (event.target === imageModal) {
+                imageModal.style.display = 'none';
+            }
+        });
+        
+        // Open social links in new tabs
+        const socialLinks = document.querySelectorAll('.social-icon');
+        
+        socialLinks.forEach(link => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+                const url = this.getAttribute('href');
+                window.open(url, '_blank');
+            });
+        });
+    </script>
+</body>
+</html>
